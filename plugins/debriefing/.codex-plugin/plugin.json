@@ -1,0 +1,102 @@
+{
+  "name": "debriefing",
+  "version": "1.0.0",
+  "description": "Competitive intelligence from your Debriefing workspace. Connects the Debriefing MCP server and adds three skills: a weekly competitor review, a battlecard built from evidence-backed signals, and a guide to the Debriefing API and MCP tools.",
+  "author": {
+    "name": "Debriefing",
+    "url": "https://debriefing.io"
+  },
+  "homepage": "https://debriefing.io/developers?tab=mcp",
+  "repository": "https://github.com/0xrome/debriefing-plugin",
+  "license": "MIT",
+  "keywords": [
+    "competitive-intelligence",
+    "competitor-monitoring",
+    "battlecards",
+    "signals",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Debriefing",
+    "shortDescription": "Know what your competitors changed",
+    "longDescription": "Debriefing watches your competitors and finds their moves, such as a price change, a launch or a new hire. Every signal carries its source evidence. Read the signals, digests and battlecards in your Debriefing workspace, see the evidence behind each claim, and catch up on what changed since a date. Write a weekly competitor review or a battlecard for a sales call, with a source link for each point. Debriefing asks before it changes your workspace or uses a plan allowance. Without signing in, you can search the competitive briefs and guides Debriefing publishes on debriefing.io.",
+    "developerName": "Debriefing",
+    "category": "Productivity",
+    "capabilities": [
+      "Read competitor signals with evidence",
+      "Read digests and battlecards",
+      "Write a weekly competitor review",
+      "Build a battlecard from signals"
+    ],
+    "websiteURL": "https://debriefing.io",
+    "supportURL": "https://debriefing.io/contact",
+    "privacyPolicyURL": "https://debriefing.io/privacy_policy",
+    "termsOfServiceURL": "https://debriefing.io/terms",
+    "defaultPrompt": [
+      "What did my competitors change this week?",
+      "Build a battlecard for my next sales call against a competitor.",
+      "Show me the evidence behind the latest high-severity signal."
+    ],
+    "brandColor": "#101214",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  },
+  "extensions": {
+    "com.openai": {
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Weekly competitor review",
+              "prompt": "What did my competitors change this week?",
+              "tools_triggered": "get_workspace, what_changed, list_competitors, search_signals, get_evidence",
+              "expected_behavior": "List the competitor moves of the last 7 days, most severe first, each with its source link and date. A move without evidence is left out."
+            },
+            {
+              "description": "Battlecard from signals",
+              "prompt": "Build a battlecard for my next sales call against a competitor.",
+              "tools_triggered": "list_competitors, get_competitor, search_signals, get_evidence, get_battlecard, get_company_profile",
+              "expected_behavior": "Write a battlecard with recent moves, where we win, where they win, objections and answers, each claim linked to its evidence."
+            },
+            {
+              "description": "Evidence behind a signal",
+              "prompt": "Show me the evidence behind the latest high-severity signal.",
+              "tools_triggered": "search_signals, get_evidence",
+              "expected_behavior": "Return the newest high-severity signal and each source excerpt with its URL and date."
+            },
+            {
+              "description": "Latest digest",
+              "prompt": "What does the latest Debriefing digest say?",
+              "tools_triggered": "get_digest",
+              "expected_behavior": "Quote the headline and summary of the newest digest and link to it."
+            },
+            {
+              "description": "Public briefs without an account",
+              "prompt": "Has Debriefing published a competitive brief about Notion?",
+              "tools_triggered": "search_public_briefs, get_public_brief",
+              "expected_behavior": "Search the briefs Debriefing publishes on debriefing.io and cite the brief URL and its sources. Say so when no brief exists."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Charging a card",
+              "prompt": "Upgrade my Debriefing plan and charge my card."
+            },
+            {
+              "description": "Deleting the workspace",
+              "prompt": "Delete my Debriefing workspace."
+            },
+            {
+              "description": "Data outside the connected workspace",
+              "prompt": "Show me another company's Debriefing workspace."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin does not sell products or process payments."
+      }
+    }
+  }
+}

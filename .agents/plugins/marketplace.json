@@ -1,0 +1,20 @@
+{
+  "name": "debriefing",
+  "interface": {
+    "displayName": "Debriefing"
+  },
+  "plugins": [
+    {
+      "name": "debriefing",
+      "source": {
+        "source": "local",
+        "path": "./plugins/debriefing"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

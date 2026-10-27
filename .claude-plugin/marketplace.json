@@ -1,0 +1,16 @@
+{
+  "name": "debriefing",
+  "description": "The Debriefing plugin: competitive intelligence with evidence-backed signals, digests and battlecards.",
+  "owner": {
+    "name": "Debriefing",
+    "url": "https://debriefing.io"
+  },
+  "plugins": [
+    {
+      "name": "debriefing",
+      "source": "./plugins/debriefing",
+      "description": "Read what your competitors changed, with the source evidence, and turn it into reviews and battlecards.",
+      "category": "productivity"
+    }
+  ]
+}
