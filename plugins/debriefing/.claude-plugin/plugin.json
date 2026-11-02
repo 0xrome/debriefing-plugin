@@ -17,10 +17,5 @@
     "signals",
     "debriefing",
     "mcp"
-  ],
-  "icon": "./assets/icon.png",
-  "documentationUrl": "https://debriefing.io/developers?tab=mcp",
-  "supportUrl": "https://debriefing.io/contact",
-  "privacyPolicyUrl": "https://debriefing.io/privacy_policy",
-  "termsOfServiceUrl": "https://debriefing.io/terms"
+  ]
 }
